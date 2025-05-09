@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  db-subscriptions:
+    image: postgres:15
+    container_name: db-subscriptions
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER_SUBSCRIPTIONS}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_SUBSCRIPTIONS}
+      POSTGRES_DB: ${POSTGRES_DB_SUBSCRIPTIONS}
+    volumes:
+      - db-subscriptions-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  db-users:
+    image: postgres:15
+    container_name: db-users
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER_USERS}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_USERS}
+      POSTGRES_DB: ${POSTGRES_DB_USERS}
+    volumes:
+      - db-users-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+
+  subscriptions-app:
+    build:
+      context: ./subscriptions
+      dockerfile: Dockerfile
+    container_name: subscriptions-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-subscriptions:5432/${POSTGRES_DB_SUBSCRIPTIONS}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER_SUBSCRIPTIONS}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD_SUBSCRIPTIONS}
+    depends_on:
+      - db-subscriptions
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
+  users-app:
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    container_name: users-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-users:5432/${POSTGRES_DB_USERS}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER_USERS}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD_USERS}
+    depends_on:
+      - db-users
+    ports:
+      - "8082:8080"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-subscriptions-data:
+  db-users-data:

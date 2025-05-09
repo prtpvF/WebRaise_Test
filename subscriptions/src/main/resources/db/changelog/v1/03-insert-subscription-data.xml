@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="insert-subscription-data" author="dev">
+        <insert tableName="subscriptions">
+            <column name="name" value="YouTube Premium"/>
+            <column name="cost" value="199.00"/>
+        </insert>
+
+        <insert tableName="subscriptions">
+            <column name="name" value="VK Музыка"/>
+            <column name="cost" value="149.00"/>
+        </insert>
+
+        <insert tableName="subscriptions">
+            <column name="name" value="Яндекс.Плюс"/>
+            <column name="cost" value="169.00"/>
+        </insert>
+
+        <insert tableName="subscriptions">
+            <column name="name" value="Netflix"/>
+            <column name="cost" value="499.00"/>
+        </insert>
+
+        <!-- Добавление других стриминговых платформ -->
+        <insert tableName="subscriptions">
+            <column name="name" value="Spotify"/>
+            <column name="cost" value="299.00"/>
+        </insert>
+
+        <insert tableName="subscriptions">
+            <column name="name" value="Apple Music"/>
+            <column name="cost" value="299.00"/>
+        </insert>
+
+        <insert tableName="subscriptions">
+            <column name="name" value="Tidal"/>
+            <column name="cost" value="249.00"/>
+        </insert>
+
+        <insert tableName="subscriptions">
+            <column name="name" value="Amazon Prime Video"/>
+            <column name="cost" value="399.00"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

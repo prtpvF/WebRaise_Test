@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="create-subscriptions-users-table" author="dev">
+        <createTable tableName="subscriptions_users">
+            <column name="subscription_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_subscriptions_users_subscription"
+                             references="subscriptions(id)"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="subscriptions_users"
+                             columnNames="subscription_id,user_id"
+                             constraintName="uk_subscriptions_users"/>
+    </changeSet>
+
+    <changeSet id="add-index-subscriptions-users" author="dev">
+        <createIndex tableName="subscriptions_users" indexName="idx_subscriptions_users_subscription_id">
+            <column name="subscription_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

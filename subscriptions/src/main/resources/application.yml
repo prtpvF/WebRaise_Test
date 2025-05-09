@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: subsctiptions
+  datasource:
+    url: ${DATASOURCE_URL}
+    password: ${DATASOURCE_PASSWORD}
+    username: ${DATASOURCE_USERNAME}
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  jpa:
+    hibernate:
+      ddl-auto: none
+server:
+  port: 8081

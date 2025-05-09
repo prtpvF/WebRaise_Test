@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: user
+
+  datasource:
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    url: ${DATASOURCE_URL}
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+server:
+  port: 8080
