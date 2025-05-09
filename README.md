@@ -1,0 +1,9 @@
+for a start yiu need to add .env file with all the params e.g
+
+POSTGRES_USER_SUBSCRIPTIONS=username
+POSTGRES_PASSWORD_SUBSCRIPTIONS=pass
+POSTGRES_DB_SUBSCRIPTIONS=db_name
+
+POSTGRES_USER_USERS=username
+POSTGRES_PASSWORD_USERS=pass
+POSTGRES_DB_USERS=db_name
